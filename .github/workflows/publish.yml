@@ -42,7 +42,7 @@ jobs:
       - name: GPG Key
         id: gpg-key
         run: |
-          KEY=`${{ secerts.GPG_KEY }} | grep -v '\-\-' | grep -v '^=.' | tr -d '\n'` 
+          KEY=`${{ secrets.GPG_KEY }} | grep -v '\-\-' | grep -v '^=.' | tr -d '\n'` 
           echo "KEY=$KEY" >> $GITHUB_OUTPUT 
 
       - name: Publish to Maven
@@ -52,5 +52,5 @@ jobs:
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.CENTRAL_PORTAL_USERNAME }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.CENTRAL_PORTAL_PASSWORD }}
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ steps.gpg-key.outputs.KEY }}
-          ORG_GRADLE_PROJECT_signingInMemoryKeyId: ${{ secerts.GPG_KEY_ID }}
-          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secerts.GPG_PASSPHRASE }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyId: ${{ secrets.GPG_KEY_ID }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.GPG_PASSPHRASE }}
