@@ -359,7 +359,7 @@ allprojects {
 
         maven {
           name = "GitHubPackages"
-          url = "https://maven.pkg.github.com/consensys/tuweni"
+          url = "https://maven.pkg.github.com/silentops/tuweni"
           credentials {
             username = System.getenv('GITHUB_ACTOR')
             password = System.getenv('GITHUB_TOKEN')

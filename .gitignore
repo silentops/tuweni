@@ -41,3 +41,7 @@ ssb-keys
 docs_warning
 io/org
 wallet.key
+
+.private.key
+.public.key
+run.sh
