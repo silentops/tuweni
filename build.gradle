@@ -14,6 +14,7 @@ import org.ajoberstar.grgit.Grgit
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import com.vanniktech.maven.publish.SonatypeHost
 
 buildscript {
   repositories {
@@ -37,6 +38,7 @@ plugins {
   id 'maven-publish'
   id 'se.patrikerdes.use-latest-versions' version '0.2.18'
   id 'com.github.ben-manes.versions' version '0.49.0'
+  id "com.vanniktech.maven.publish" version "0.30.0"
 }
 
 description = 'A set of libraries and other tools to aid development of blockchain and other decentralized software in Java and other JVM languages'
@@ -582,4 +584,38 @@ project.task("checkNotice") {
     }
   }
   throw new GradleException('NOTICE file is not up-to-date')
+}
+
+mavenPublishing {
+
+  coordinates("name.divitotawela.sandbox", "tuweni", "24.10.0")
+
+  pom {
+    name = "My Library"
+    description = "A description of what my library does."
+    inceptionYear = "2020"
+    url = "https://github.com/silentops/tuweni"
+    licenses {
+      license {
+        name = "The Apache License, Version 2.0"
+        url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+        distribution = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+      }
+    }
+    developers {
+      developer {
+        id = "username"
+        name = "Chaminda Divitotawela"
+        url = "https://github.com/silentops/"
+      }
+    }
+    scm {
+      url = "https://github.com/silentops/tuweni"
+      connection = "scm:git:git://github.com/silentops/tuweni.git"
+      developerConnection = "scm:git:ssh://git@github.com/silentops/tuweni.git"
+    }
+  }
+
+  publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+  signAllPublications()
 }
